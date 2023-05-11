@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import Image from "next/image";
 
 import { Layout } from 'components/account';
 import { userService, alertService } from 'services';
@@ -36,8 +37,27 @@ function Login() {
 
     return (
         <Layout>
-            <div className="card">
-                <h4 className="card-header">Login</h4>
+
+            <header className="flex justify-center">
+
+            <div className="flex flex-wrap items-center justify-around">
+
+            <Link href="/startPage">
+                        <Image
+                                class="basis-1/8 shrink"
+                                src={require('pages/assets/Bothniabladet.png')}
+                                alt="Bothniabladet logga"
+                                width={1000}
+                                height={1000}
+                                priority
+                            />
+            </Link>
+
+                        </div>
+
+            </header>
+            <div className="login_box">
+                <h4 className="card-header">Logga in</h4>
                 <div className="card-body">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-3">
@@ -50,14 +70,16 @@ function Login() {
                             <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                             <div className="invalid-feedback">{errors.password?.message}</div>
                         </div>
-                        <button disabled={formState.isSubmitting} className="btn btn-primary">
+                        <button disabled={formState.isSubmitting} className="loginButton">
+                            
                             {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
                             Login
                         </button>
-                        <Link href="/account/register" className="btn btn-link">Register</Link>
+                        <Link href="/account/register" className="registerButton">Register</Link>
                     </form>
                 </div>
             </div>
+            
         </Layout>
     );
 }
